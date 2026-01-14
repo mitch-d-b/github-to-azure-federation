@@ -1,10 +1,6 @@
 name: GitHub Action to Azure using identity federation
 
 on:
-  push:
-    branches:
-      - main
-  
   workflow_dispatch:
     
 jobs:
