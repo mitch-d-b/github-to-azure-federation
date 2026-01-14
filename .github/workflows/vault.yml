@@ -1,4 +1,4 @@
-name: Access Azure Key Vault and pass secret to workflow
+name: Get Key Vault secret
 
 on:
   push:
@@ -28,9 +28,9 @@ jobs:
         id: keyvault
         uses: azure/cli@v2
         with:
-          KEYVAULT_NAME: mvp-dev
-          SECRET_NAME: sample-secret
           inlineScript: |
+            KEYVAULT_NAME=mvp-dev
+            SECRET_NAME=sample-secret
             SECRET_VALUE=$(az keyvault secret show --name $SECRET_NAME --vault-name $KEYVAULT_NAME --query value -o tsv)
             echo "::add-mask::$SECRET_VALUE"
             echo "SECRET_VALUE=$SECRET_VALUE" >> $GITHUB_ENV
